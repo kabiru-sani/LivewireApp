@@ -64,6 +64,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     window.addEventListener('show-form', event => {
         $('#form').modal('show');
     })
+
+    window.addEventListener('hide-form', event => {
+        $('#form').modal('hide');
+    })
 </script>
 @livewireScripts
 </body>

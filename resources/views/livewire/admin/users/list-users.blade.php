@@ -36,20 +36,22 @@
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Kabiru Sani</td>
-                                <td>kabiru@gmail.com</td>
-                                <td>
-                                    <a href="#">
-                                        <i class="fa fa-edit mr-2"></i>
-                                    </a>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
+                                    <td>
+                                        <a href="#">
+                                            <i class="fa fa-edit mr-2"></i>
+                                        </a>
 
-                                    <a href="#">
-                                        <i class="fa fa-trash text-danger"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                        <a href="#">
+                                            <i class="fa fa-trash text-danger"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                             @endforeach
                         </tbody>
                     </table>
               </div>
@@ -60,9 +62,9 @@
       </div><!-- /.container-fluid -->
     </div>
 
-<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self >
     <div class="modal-dialog" role="document">
-        <form autocomplete="off">
+        <form autocomplete="off" wire:submit.prevent="createUser">
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
@@ -71,27 +73,37 @@
             <div class="modal-body">
             <div class="mb-3">
                 <label for="name" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Enter Full Name" aria-describedby="nameHelp">
+                <input type="text" wire:model.defer="state.name" class="form-control @error('name') is-invalid @enderror" id="name" placeholder="Enter Full Name" aria-describedby="nameHelp">
+                @error('name')
+                     <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email">
+                <input type="text" wire:model.defer="state.email" class="form-control @error('email') is-invalid @enderror" id="email" aria-describedby="emailHelp" placeholder="Enter Email">
+                @error('email')
+                     <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Enter Password">
+                <input type="password" wire:model.defer="state.password" class="form-control @error('password') is-invalid @enderror" id="password" placeholder="Enter Password">
+                @error('password')
+                     <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="passwordConfirmation" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="passwordConfirmation" placeholder="Confirm Password">
+                <input type="password" wire:model.defer="state.password_confirmation" class="form-control" id="passwordConfirmation" placeholder="Confirm Password">
+            </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submite" class="btn btn-primary">Save</button>
+            </div>
             </div>
         </form>
-        </div>
-        <div class="modal-footer">
-            <button type="cancel" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-            <button type="submite" class="btn btn-primary">Save</button>
-        </div>
-        </div>
     </div>
 </div>
 
