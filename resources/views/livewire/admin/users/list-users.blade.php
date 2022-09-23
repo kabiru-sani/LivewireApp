@@ -42,11 +42,11 @@
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        <a href="#">
+                                        <a href="#" wire:click.prevent="edit({{ $user }})">
                                             <i class="fa fa-edit mr-2"></i>
                                         </a>
 
-                                        <a href="#">
+                                        <a href="#" wire:click.prevent="confirmUserRemoval({{ $user->id }})">
                                             <i class="fa fa-trash text-danger"></i>
                                         </a>
                                     </td>
@@ -64,10 +64,16 @@
 
 <div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self >
     <div class="modal-dialog" role="document">
-        <form autocomplete="off" wire:submit.prevent="createUser">
+        <form autocomplete="off" wire:submit.prevent="{{ $showEditModal? 'updateUser' : 'createUser' }}">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">
+                    @if($showEditModal)
+                        <span>Edit User</span>
+                    @else
+                        <span>Add New User</span>
+                    @endif
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
@@ -99,11 +105,38 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="submite" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i class="fa fa-times mr-1"></i>Cancel</button>
+                <button type="submit" class="btn btn-primary"> <i class="fa fa-save mr-1"></i>
+                @if ($showEditModal)
+                    <span>Save Changes</span>
+                @else
+                     <span>Save</span>
+                @endif
+                </button>
             </div>
             </div>
         </form>
+    </div>
+</div>
+
+{{-- Delete confirmation modal --}}
+
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" wire:ignore.self >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5><b>Delete User</b><i class="fa fa-info-circle ml-2"></i></h5>
+            </div>
+
+            <div class="modal-body">
+                <h4> Are you sure you want to delete this user?</h4>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i class="fa fa-times mr-1"></i>Cancel</button>
+                <button type="button" wire:click.prevent="deleteUser" class="btn btn-danger"> <i class="fa fa-trash mr-1"></i>Delete</button>
+            </div>
+        </div>
     </div>
 </div>
 

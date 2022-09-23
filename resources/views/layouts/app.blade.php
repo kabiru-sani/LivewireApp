@@ -17,6 +17,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{ asset('backend/dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  {{-- toaster alert --}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('backend/plugins/toastr/toastr.min.css') }}">
   @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini">
@@ -60,14 +62,41 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
+{{-- toaster alert js --}}
+<script type="text/javascript" src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
+
+<script>
+    $(document).ready(function(){
+        toastr.options = {
+            "positionClass": "toast-top-right",
+            "progressBar": true,
+        }
+
+        window.addEventListener('hide-form', event => {
+        $('#form').modal('hide');
+
+        toastr.success(event.detail.message, 'Success!');
+    })
+
+
+    });
+
+</script>
 <script>
     window.addEventListener('show-form', event => {
         $('#form').modal('show');
-    })
+    });
 
-    window.addEventListener('hide-form', event => {
-        $('#form').modal('hide');
-    })
+    window.addEventListener('show-delete-modal', event => {
+        $('#confirmationModal').modal('show');
+    });
+
+     window.addEventListener('hide-delete-modal', event => {
+        $('#confirmationModal').modal('hide');
+
+        toastr.success(event.detail.message, 'Success!');
+     });
+
 </script>
 @livewireScripts
 </body>
