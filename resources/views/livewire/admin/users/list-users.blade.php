@@ -31,6 +31,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Date Added</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -41,6 +42,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ $user->created_at->toFormattedDate() }}</td>
                                     <td>
                                         <a href="#" wire:click.prevent="edit({{ $user }})">
                                             <i class="fa fa-edit mr-2"></i>

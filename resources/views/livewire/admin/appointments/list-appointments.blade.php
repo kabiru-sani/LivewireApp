@@ -34,19 +34,20 @@
                                 <th>Client Name</th>
                                 <th>Date</th>
                                 <th>Time</th>
-                                <th>Status</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Options</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
 
                         <tbody>
-
+                            @foreach($appointments as $appointment)
                                 <tr>
-                                    <td>1</td>
-                                    <td>Client Name</td>
-                                    <td>Date</td>
-                                    <td>Time</td>
-                                    <td>Pending</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $appointment->client->name }}</td>
+                                    <td>{{ $appointment->date->toFormattedDate() }}</td>
+                                    <td>{{ $appointment->time->toFormattedTime() }}</td>
+                                    <td><span class="badge badge-{{ $appointment->status_badge }}">{{ $appointment->status }}</span></td>
                                     <td>
                                         <a href="#" wire:click.prevent="edit()">
                                             <i class="fa fa-edit mr-2"></i>
@@ -57,12 +58,12 @@
                                         </a>
                                     </td>
                                 </tr>
-
+                            @endforeach
                         </tbody>
                     </table>
               </div>
               <div class="card-footer d-flex justify-content-end">
-                {{-- {{ $users->links() }} --}}
+                {{ $appointments->links() }}
               </div>
             </div>
           </div>
