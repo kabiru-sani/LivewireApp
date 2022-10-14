@@ -104,45 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 </script>
 
-<script>
-    $(document).ready(function() {
-        $('#appointmentDate').datetimepicker({
-            format: 'L',
-        });
-
-        $('#appointmentDate').on("change.datetimepicker", function (e) {
-            let date = $(this).data('appointmentdate');
-            eval(date).set('state.date', $('#appointmentDateInput').val());
-        });
-
-        $('#appointmentTime').datetimepicker({
-            format: 'LT',
-        });
-
-        $('#appointmentTime').on("change.datetimepicker", function (e) {
-            let time = $(this).data('appointmenttime');
-            eval(time).set('state.time', $('#appointmentTimeInput').val());
-        });
-    });
-</script>
-<script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
-<script>
-        ClassicEditor
-            .create( document.querySelector( '#note' ) )
-            .then( editor => {
-                // editor.model.document.on('change:data', () => {
-                //     let note = $('#note').data('note');
-                //     eval(note).set('state.note', editor.getData());
-                // });
-                document.querySelector('#submit').addEventListener('click', () => {
-                    let note = $('#note').data('note');
-                    eval(note).set('state.note', editor.getData());
-                })
-            } )
-            .catch( error => {
-                    console.error( error );
-            } );
-</script>
+@stack('js')
 
 @livewireScripts
 </body>
