@@ -19,6 +19,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   {{-- toaster alert --}}
   <link rel="stylesheet" type="text/css" href="{{ asset('backend/plugins/toastr/toastr.min.css') }}">
+    {{-- date and time picker plugin --}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('backend/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
   @livewireStyles
 </head>
 <body class="hold-transition sidebar-mini">
@@ -64,6 +66,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="{{ asset('backend/dist/js/adminlte.min.js') }}"></script>
 {{-- toaster alert js --}}
 <script type="text/javascript" src="{{ asset('backend/plugins/toastr/toastr.min.js') }}"></script>
+{{-- date and time picker plugin --}}
+<script type="text/javascript" src="https://unpkg.com/moment"></script>
+<script type="text/javascript" src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
 <script>
     $(document).ready(function(){
@@ -98,6 +103,47 @@ scratch. This page gets rid of all links and provides the needed markup only.
      });
 
 </script>
+
+<script>
+    $(document).ready(function() {
+        $('#appointmentDate').datetimepicker({
+            format: 'L',
+        });
+
+        $('#appointmentDate').on("change.datetimepicker", function (e) {
+            let date = $(this).data('appointmentdate');
+            eval(date).set('state.date', $('#appointmentDateInput').val());
+        });
+
+        $('#appointmentTime').datetimepicker({
+            format: 'LT',
+        });
+
+        $('#appointmentTime').on("change.datetimepicker", function (e) {
+            let time = $(this).data('appointmenttime');
+            eval(time).set('state.time', $('#appointmentTimeInput').val());
+        });
+    });
+</script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
+<script>
+        ClassicEditor
+            .create( document.querySelector( '#note' ) )
+            .then( editor => {
+                // editor.model.document.on('change:data', () => {
+                //     let note = $('#note').data('note');
+                //     eval(note).set('state.note', editor.getData());
+                // });
+                document.querySelector('#submit').addEventListener('click', () => {
+                    let note = $('#note').data('note');
+                    eval(note).set('state.note', editor.getData());
+                })
+            } )
+            .catch( error => {
+                    console.error( error );
+            } );
+</script>
+
 @livewireScripts
 </body>
 </html>
