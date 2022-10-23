@@ -6,10 +6,8 @@ data-toggle="datetimepicker" data-target="#{{ $id }}" onchange="this.dispatchEve
 
 @push('js')
     <script type="text/javascript">
-        $(function () {
-            $('#{{ $id }}').datetimepicker({
+        $('#{{ $id }}').datetimepicker({
                 format: 'L'
             });
-        });
     </script>
 @endpush

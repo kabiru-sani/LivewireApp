@@ -102,6 +102,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         toastr.success(event.detail.message, 'Success!');
      });
 
+     window.addEventListener('alert', event => {
+        toastr.success(event.detail.message, 'Success!');
+     });
+
 </script>
 
 @stack('js')

@@ -35,7 +35,6 @@
                                 <th>Date</th>
                                 <th>Time</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Options</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -45,11 +44,11 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $appointment->client->name }}</td>
-                                    <td>{{ $appointment->date->toFormattedDate() }}</td>
-                                    <td>{{ $appointment->time->toFormattedTime() }}</td>
+                                    <td>{{ $appointment->date }}</td>
+                                    <td>{{ $appointment->time }}</td>
                                     <td><span class="badge badge-{{ $appointment->status_badge }}">{{ $appointment->status }}</span></td>
                                     <td>
-                                        <a href="#" wire:click.prevent="edit()">
+                                        <a href="{{ route('admin.appointments.edit', $appointment) }}">
                                             <i class="fa fa-edit mr-2"></i>
                                         </a>
 
