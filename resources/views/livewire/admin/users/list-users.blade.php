@@ -20,8 +20,11 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
-            <div class="d-flex justify-content-end mb-2">
+            <div class="d-flex justify-content-between mb-2">
                 <button class="btn btn-primary" wire:click.prevent="addNewUser"><i class="fa fa-plus-circle mr-1"></i> Add New User</button>
+
+                <x-search-input wire:model="searchTerm" />
+
             </div>
             <div class="card">
               <div class="card-body">
@@ -36,8 +39,8 @@
                             </tr>
                         </thead>
 
-                        <tbody>
-                            @foreach ($users as $user)
+                        <tbody wire:loading.class="text-muted">
+                            @forelse ($users as $user)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $user->name }}</td>
@@ -53,7 +56,16 @@
                                         </a>
                                     </td>
                                 </tr>
-                             @endforeach
+                            @empty
+                            <tr>
+                               <td colspan="5" class="text-center">
+                                <img src="https://img.freepik.com/free-vector/
+                                no-data-concept-illustration_114360-626.jpg?size=626&ext=jpg&uid=R51823309&ga=GA1.2.224938283.1666624918&semt=sph"
+                                alt="No results found" style="width: 150px; height: 100px;">
+                                <p class="mt-2">No results found!</p>
+                            </td>
+                            </tr>
+                             @endforelse
                         </tbody>
                     </table>
               </div>
