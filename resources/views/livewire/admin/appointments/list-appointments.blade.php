@@ -20,10 +20,31 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-lg-12">
-            <div class="d-flex justify-content-end mb-2">
-                <a href="{{ route('admin.appointment.create') }}">
-                    <button class="btn btn-primary"><i class="fa fa-plus-circle mr-1"></i> Add New Appointment</button>
-                </a>
+            <div class="d-flex justify-content-between mb-2">
+                <div>
+                    <a href="{{ route('admin.appointment.create') }}">
+                        <button class="btn btn-primary"><i class="fa fa-plus-circle mr-1"></i> Add New Appointment</button>
+                    </a>
+                </div>
+                <div class="btn-group">
+                    <button wire:click="filterAppointmentsByStatus" type="button" class="btn
+                    {{ is_null($status) ? 'btn-secondary' : 'btn-default' }}">
+                        <span class="mr-1">All</span>
+                        <span class="badge badge-pill badge-info">{{ $appointmentsCount }}</span>
+                    </button>
+
+                    <button wire:click="filterAppointmentsByStatus('scheduled')" type="button"
+                    class="btn {{ ($status == 'scheduled') ? 'btn-secondary' : 'btn-default' }}">
+                        <span class="mr-1">Scheduled</span>
+                        <span class="badge badge-pill badge-primary">{{ $scheduledAppointmentCount }}</span>
+                    </button>
+
+                    <button wire:click="filterAppointmentsByStatus('closed')" type="button"
+                    class="btn {{ ($status == 'closed') ? 'btn-secondary' : 'btn-default' }}">
+                        <span class="mr-1">Closed</span>
+                        <span class="badge badge-pill badge-success">{{ $closedAppointmentCount }}</span>
+                    </button>
+                </div>
             </div>
             <div class="card">
               <div class="card-body">
@@ -62,7 +83,7 @@
                     </table>
               </div>
               <div class="card-footer d-flex justify-content-end">
-                {{ $appointments->links() }}
+                {!! $appointments->links() !!}
               </div>
             </div>
           </div>
