@@ -35,6 +35,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Date Added</th>
+                                <th>Role</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -50,6 +51,12 @@
                                     </td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->created_at->toFormattedDate() }}</td>
+                                    <td>
+                                        <select class="form-control" wire:change='changeRole({{ $user }}, $event.target.value)'>
+                                            <option value="admin" {{ ($user->role == 'admin') ? 'selected' : '' }}>ADMIN</option>
+                                            <option value="user" {{ ($user->role == 'user') ? 'selected' : '' }}>USER</option>
+                                        </select>
+                                    </td>
                                     <td>
                                         <a href="#" wire:click.prevent="edit({{ $user }})">
                                             <i class="fa fa-edit mr-2"></i>
