@@ -13,6 +13,9 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -58,5 +61,13 @@ class User extends Authenticatable
         }
         return asset('noimage.png');
 
+    }
+
+    public function isAdmin()
+    {
+        if($this->role != self::ROLE_ADMIN){
+            return false;
+        }
+        return true;
     }
 }
