@@ -18,6 +18,8 @@
     <!-- /.content-header -->
     <div class="row">
         <livewire:admin.dashboard.appointment-count />
+
+        <livewire:admin.dashboard.users-count />
     </div>
     <!-- Main content -->
     <div class="content">

@@ -1,6 +1,6 @@
 <div class="col-lg-3 col-6">
     <!-- small box -->
-    <div class="small-box bg-success">
+    <div class="small-box bg-info">
       <div class="inner">
         <div class="d-flex justify-content-between">
             <h3 wire:loading.delay.remove>{{ $appointmentsCount }}</h3>
