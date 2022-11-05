@@ -13,12 +13,17 @@ class UpdateProfile extends Component
 
     public function updatedImage()
     {
+        $previousPath = auth()->user()->avatar; // fecthes the previous profile image
+
         $path = $this->image->store('/', 'avatars');
 
         auth()->user()->update(['avatar' => $path]);
 
+        Storage::disk('avatars')->delete($previousPath); // deletes the previous profile image
+
         $this->dispatchBrowserEvent('updated', ['message' => 'Profile changed successfully']);
     }
+
 
     public function render()
     {

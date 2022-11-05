@@ -27,6 +27,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
   {{-- <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script> --}}
 
+   <!-- Select2 -->
+   <link rel="stylesheet" href="{{ asset('backend/plugins/select2/css/select2.min.css') }}">
+   <link rel="stylesheet" href="{{ asset('backend/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
   @livewireStyles
   @stack('styles')
 </head>
@@ -77,6 +81,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script type="text/javascript" src="https://unpkg.com/moment"></script>
 <script type="text/javascript" src="{{ asset('backend/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 
+<!-- Select2 multiple select option-->
+<script src="{{ asset('backend/plugins/select2/js/select2.full.min.js') }}"></script>
 
 <script>
     $(document).ready(function(){

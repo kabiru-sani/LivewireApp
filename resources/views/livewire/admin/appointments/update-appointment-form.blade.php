@@ -40,6 +40,17 @@
                                             @enderror
                                         </div>
                                     </div>
+
+                                    <div class="col-md-6">
+                                        <div wire:ignore class="form-group">
+                                            <label>Select Team Members</label>
+                                            <select wire:model="state.members" class="form-control select2" multiple="multiple" data-placeholder="Select Team Members" style="width: 100%;">
+                                                <option value="one">One</option>
+                                                <option value="two">Two</option>
+                                                <option value="three">Three</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -111,6 +122,16 @@
         </div>
     </div>
     @push('js')
+
+    <script>
+        $(function () {
+            $('.select2').select2({
+                theme: 'bootstrap4',
+            }).on('change', function () {
+                @this.set('state.members', $(this).val());
+            });
+        })
+    </script>
 
         <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
         <script>

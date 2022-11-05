@@ -140,7 +140,9 @@
                     x-on:livewire-upload-finish="isUploading = false; progress: 5"
                     x-on:livewire-upload-erroe="isUploading = false"
                     x-on:livewire-upload-progress="progress = $event.detail.progress" >
+
                         <input wire:model="photo" type="file" class="custom-file-input" id="profilePhoto">
+
                         <div x-show.transition="isUploading" class="progress progress-sm mt-2 rounded">
                             <div class="progress-bar bg-primary progress-bar-striped" role="progressbar"
                             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" x-bind:style="'width: ${progress}%'" >
@@ -152,7 +154,7 @@
                         @if($photo)
                             {{ $photo->getClientOriginalName() }}
                         @else
-                            Choose file
+                            Choose Image
                         @endif
                     </label>
                 </div>

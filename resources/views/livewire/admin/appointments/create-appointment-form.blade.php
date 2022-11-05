@@ -40,33 +40,18 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-{{--
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="appiontmentStartTime">Appointment Start Time</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-clock"></i></span>
-                                                </div>
-                                                    <x-timepicker wire:model.defer="state.appointment_start_time" id="appiontmentStartTime" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="appiontmentEndTime">Appointment End Time</label>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><i class="fas fa-clock"></i></span>
-                                                </div>
-                                                    <x-timepicker wire:model.defer="state.appointment_end_time" id="appiontmentEndTime" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
 
+                                    <div class="col-md-6">
+                                        <div wire:ignore class="form-group">
+                                            <label>Select Team Members</label>
+                                            <select name="" id="" class="form-control select2" multiple="multiple" data-placeholder="Select Team Members" style="width: 100%;">
+                                                <option value="one">One</option>
+                                                <option value="two">Two</option>
+                                                <option value="three">Three</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -137,6 +122,16 @@
         </div>
     </div>
     @push('js')
+
+    <script>
+        $(function () {
+            $('.select2').select2({
+                theme: 'bootstrap4',
+            }).on('change', function () {
+                @this.set('state.members', $(this).val());
+            });
+        })
+    </script>
 
         <script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
         <script>
